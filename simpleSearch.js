@@ -21,15 +21,23 @@ describe('Text example 2 on angular page', function() {
 });
 
 async function searchTrip(from, to) {
+  
+  var spanFrom = element.all(by.xpath("//label/span[@class='airport-select__label']")).get(0);
+  expect(spanFrom.getText()).toBe("Fly from");
+
   element(by.id('airport-select-origin')).click();
   element(by.id('airport-select-origin')).clear();
   element(by.id('airport-select-origin')).sendKeys(from);
   element.all(by.xpath('//button[@type="button"]/span[contains(text(), "'+from+'")]')).click();
+
+  
+  var span = element.all(by.xpath("//label/span[@class='airport-select__label']")).get(1);
+  expect(span.getText()).toBe("Fly to");
+
   element(by.id('airport-select-destination')).click();
   element(by.id('airport-select-destination')).clear();
   element(by.id('airport-select-destination')).sendKeys(to);
   element.all(by.xpath('//button[@type="button"]/span[contains(text(), "'+to+'")]')).click();
-  //browser.sleep(3000);
   click('searchButton');
 }
 
@@ -50,7 +58,6 @@ function afterMethod(){
 }
 
 async function checkPresence(elm){
-  //browser.sleep(5000);
   var elem = element(by.id(elm));
   expect(elem.isDisplayed()).toBe(false);
 }
