@@ -16,29 +16,37 @@ describe('Text example 2 on angular page', function() {
     checkTitle('Book cheap flights with Norwegian, a low-cost airline | Norwegian');
     searchTrip("New York-JFK", "London-Gatwick" );
     checkPresence("_hjRemoteVarsFrame");
-    afterMethod();
+      afterMethod();
   });
 });
 
 async function searchTrip(from, to) {
   
-  var spanFrom = element.all(by.xpath("//label/span[@class='airport-select__label']")).get(0);
-  expect(spanFrom.getText()).toBe("Fly from");
-
-  element(by.id('airport-select-origin')).click();
-  element(by.id('airport-select-origin')).clear();
-  element(by.id('airport-select-origin')).sendKeys(from);
-  element.all(by.xpath('//button[@type="button"]/span[contains(text(), "'+from+'")]')).click();
-
+  try {
+    var spanFrom = element.all(by.xpath("//label/span[@class='airport-select__label']")).get(0);
+    expect(spanFrom.getText()).toBe("Fly from");
+    element(by.id('airport-select-origin')).click();
+    element(by.id('airport-select-origin')).clear();
+    element(by.id('airport-select-origin')).sendKeys(from);
+    element.all(by.xpath('//button[@type="button"]/span[contains(text(), "' + from + '")]')).click();
+  }
+  catch (err)
+  {
+    console.log("Error in 'from field' setting...");
+  }
   
-  var span = element.all(by.xpath("//label/span[@class='airport-select__label']")).get(1);
-  expect(span.getText()).toBe("Fly to");
-
-  element(by.id('airport-select-destination')).click();
-  element(by.id('airport-select-destination')).clear();
-  element(by.id('airport-select-destination')).sendKeys(to);
-  element.all(by.xpath('//button[@type="button"]/span[contains(text(), "'+to+'")]')).click();
-  click('searchButton');
+  
+    try {
+        var span = element.all(by.xpath("//label/span[@class='airport-select__label']")).get(1);
+        expect(span.getText()).toBe("Fly to");
+        element(by.id('airport-select-destination')).click();
+        element(by.id('airport-select-destination')).clear();
+        element(by.id('airport-select-destination')).sendKeys(to);
+        element.all(by.xpath('//button[@type="button"]/span[contains(text(), "' + to + '")]')).click();
+        click('searchButton');
+    } catch (e) {
+        console.log("Error in 'to field' setting...");
+    }
 }
 
 function openPage(page) {
