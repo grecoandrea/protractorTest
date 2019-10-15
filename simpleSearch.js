@@ -32,7 +32,7 @@ async function searchTrip(from, to) {
   }
   catch (err)
   {
-    console.log("Error in 'from field' setting...");
+    console.log("Error in 'from form field' setting...");
   }
   
   
@@ -45,7 +45,7 @@ async function searchTrip(from, to) {
         element.all(by.xpath('//button[@type="button"]/span[contains(text(), "' + to + '")]')).click();
         click('searchButton');
     } catch (e) {
-        console.log("Error in 'to field' setting...");
+        console.log("Error in 'to form field' setting...");
     }
 }
 
