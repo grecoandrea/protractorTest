@@ -1,6 +1,5 @@
 version: 2
-
-    jobs:
+jobs:
         # The test job
         test:
             working_directory: ~/protractorTest
