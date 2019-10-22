@@ -9,5 +9,9 @@ jobs:
     steps:
       - checkout
       
-      - run: yarn install
-	  - run: yarn test
+      - run:
+			name: Testing the project
+			command: yarn install
+	  - run:
+			name: Testing the project
+			command: yarn test
