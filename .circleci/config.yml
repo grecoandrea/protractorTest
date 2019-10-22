@@ -4,25 +4,12 @@ jobs:
     docker:
       - image: circleci/node:10-browsers
 
-    working_directory: ~/repo
+    working_directory: ~/protractorTest
 
     steps:
       - checkout
-
+      
       - run:
-          name: Install
-          command: yarn install
-
-      - run:
-          name: Selenium
+          name: protractorTest
           command: |
-            yarn run webdriver:update
-      - run:
-          name: Selenium
-          command: |
-            yarn run webdriver:start
-          background: true
-
-      - run: |
-          sleep 2
-          yarn test
+            protractor conf.js
